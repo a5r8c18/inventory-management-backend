@@ -11,7 +11,7 @@ private categoriesRepository: Repository<Category>,
 ) {}
 
 findAll(): Promise<Category[]> {
-return this.categoriesRepository.find();
+return this.categoriesRepository.find({ relations: ['brands'] });
 }
 
 findOne(id: number): Promise<Category> {

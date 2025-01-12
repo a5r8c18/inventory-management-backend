@@ -14,7 +14,7 @@ async findAll(): Promise<Brand[]> {
     console.log('Fetching brands from database'); // Añade este log
     const brands = await this.brandRepository.find();
     console.log('Brands:', brands); // Añade este log
-    return brands;
+    return this.brandRepository.find({ relations: ['categories'] });
     }
 
 findOne(id: number): Promise<Brand> {
