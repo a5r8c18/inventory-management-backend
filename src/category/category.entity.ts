@@ -1,5 +1,6 @@
 import { Brand } from 'src/brand/entities/brand.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Product } from 'src/product/product.entity';
 
 
 @Entity('categories')
@@ -14,4 +15,8 @@ name: string;
 status: string;
 
 @OneToMany(() => Brand, brand => brand.categories) brands: Brand[];
+
+
+@OneToMany(()=> Product, product => product.category)
+products: Product[];
 }

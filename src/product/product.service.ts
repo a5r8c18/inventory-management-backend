@@ -7,27 +7,43 @@ import { Product } from './product.entity';
 export class ProductService {
 constructor(
 @InjectRepository(Product)
-private productRepository: Repository<Product>,
+private productsRepository: Repository<Product>,
 ) {}
 
 findAll(): Promise<Product[]> {
-return this.productRepository.find();
+return this.productsRepository.find();
 }
 
 findOne(id: number): Promise<Product> {
-return this.productRepository.findOneBy({ id });
+return this.productsRepository.findOneBy({ id });
 }
 
-create(product: Product): Promise<Product> {
-return this.productRepository.save(product);
-}
+async create(product: Product): Promise<Product> {
+    // Manejo de valores nulos o vacíos
+    product.quantity = product.quantity || 0; // Asigna 0 si quantity está vacío
+    product.base_price = product.base_price || 0; // Asigna 0 si base_price está vacío
+    product.tax = product.tax || 0; // Asigna 0 si tax está vacío
+    
+    // Depuración y logging
+    console.log('Product data:', product);
+    
+    return this.productsRepository.save(product);
+    }
 
-async update(id: number, product: Product): Promise<Product> {
-await this.productRepository.update(id, product);
-return this.productRepository.findOneBy({ id });
-}
+    async update(id: number, product: Product): Promise<Product> {
+        // Manejo de valores nulos o vacíos
+        product.quantity = product.quantity || 0; // Asigna 0 si quantity está vacío
+        product.base_price = product.base_price || 0; // Asigna 0 si base_price está vacío
+        product.tax = product.tax || 0; // Asigna 0 si tax está vacío
+        
+        // Depuración y logging
+        console.log('Product data:', product);
+        
+        await this.productsRepository.update(id, product);
+        return this.productsRepository.findOneBy({ id });
+        }
 
 async remove(id: number): Promise<void> {
-await this.productRepository.delete(id);
+await this.productsRepository.delete(id);
 }
 }

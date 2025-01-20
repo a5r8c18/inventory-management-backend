@@ -4,6 +4,8 @@ import { BrandModule } from './brand/brand.module';
 import { CustomerModule } from './customer/customer.module';
 import { CategoriesModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
+import { SupplierModule } from './supplier/supplier.module';
+import { InventoryModule } from './inventory/inventory.module';
 
 @Module({
   imports: [
@@ -16,11 +18,14 @@ import { ProductModule } from './product/product.module';
       database: 'inventario_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      logging: true,
     }),
     CustomerModule,
     BrandModule,
     CategoriesModule,
-    ProductModule
+    ProductModule,
+    SupplierModule,
+    InventoryModule,
   ],
   controllers: [  ],
   providers: [   ],

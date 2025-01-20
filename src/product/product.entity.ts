@@ -1,15 +1,20 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Brand } from 'src/brand/entities/brand.entity';
+import { ProductBrand } from 'src/productbrand.entity';
+import { Purchase } from 'src/purchase/purchase.entity';
+import { Category } from 'src/category/category.entity';
+import { Supplier } from 'src/supplier/supplier.entity';
 
 @Entity()
 export class Product {
 @PrimaryGeneratedColumn()
 id: number;
 
-@Column()
-category: string;
+@ManyToOne(() => Category, category => category.products)
+category: Category;
 
-@Column()
-brand: string;
+@ManyToOne(() => Brand, brand => brand.products)
+brand: Brand;
 
 @Column()
 name: string;
@@ -32,9 +37,13 @@ base_price: number;
 @Column('decimal')
 tax: number;
 
-@Column()
-supplier: string;
+@ManyToOne(() => Supplier, supplier => supplier.products)
+supplier: Supplier;
 
-@Column()
-status: string;
+
+@OneToMany(() => ProductBrand, productBrand => productBrand.product)
+productBrands: ProductBrand[];
+
+@ManyToOne(() => Purchase, purchase => purchase.product)
+purchases: Purchase;
 }
