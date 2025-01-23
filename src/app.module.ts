@@ -6,6 +6,8 @@ import { CategoriesModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { InventoryModule } from './inventory/inventory.module';
+import { PurchaseModule } from './purchase/purchase.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { InventoryModule } from './inventory/inventory.module';
       database: 'inventario_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-      logging: true,
+      
     }),
     CustomerModule,
     BrandModule,
@@ -26,6 +28,8 @@ import { InventoryModule } from './inventory/inventory.module';
     ProductModule,
     SupplierModule,
     InventoryModule,
+    PurchaseModule,
+    OrderModule
   ],
   controllers: [  ],
   providers: [   ],
